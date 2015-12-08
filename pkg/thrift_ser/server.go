@@ -8,7 +8,7 @@ import (
 	"github.com/asyoume/Auth/thrift_go/User"
 )
 
-func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift.TProtocolFactory, addr string, secure bool) error {
+func runServer(transportFactory thrift.TTransportFactory, transport_type string, protocolFactory thrift.TProtocolFactory, addr string, secure bool) error {
 	var transport thrift.TServerTransport
 	var err error
 	if secure {

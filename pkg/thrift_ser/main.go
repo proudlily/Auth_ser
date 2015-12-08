@@ -15,16 +15,19 @@ func Usage() {
 
 func main() {
 	flag.Usage = Usage
-	//server := flag.Bool("server", false, "Run server")
 	protocol := flag.String("P", "binary", "Specify the protocol (binary, compact, json, simplejson)")
-	framed := flag.Bool("framed", false, "Use framed transport")
+	transport := flag.String("transport", "binary", "Specify transport (framed, buffered, http, file, memory, zlib)")
+
+	framed := flag.Bool("framed", true, "Use framed transport")
 	buffered := flag.Bool("buffered", false, "Use buffered transport")
+
 	addr := flag.String("addr", "localhost:9090", "Address to listen to")
 	secure := flag.Bool("secure", false, "Use tls secure transport")
 
 	flag.Parse()
 
 	var protocolFactory thrift.TProtocolFactory
+	fmt.Println("protocol:", *protocol)
 	switch *protocol {
 	case "compact":
 		protocolFactory = thrift.NewTCompactProtocolFactory()
@@ -32,7 +35,7 @@ func main() {
 		protocolFactory = thrift.NewTSimpleJSONProtocolFactory()
 	case "json":
 		protocolFactory = thrift.NewTJSONProtocolFactory()
-	case "binary", "":
+	case "binary":
 		protocolFactory = thrift.NewTBinaryProtocolFactoryDefault()
 	default:
 		fmt.Fprint(os.Stderr, "Invalid protocol specified", protocol, "\n")
@@ -41,6 +44,7 @@ func main() {
 	}
 
 	var transportFactory thrift.TTransportFactory
+
 	if *buffered {
 		transportFactory = thrift.NewTBufferedTransportFactory(8192)
 	} else {
@@ -51,7 +55,7 @@ func main() {
 		transportFactory = thrift.NewTFramedTransportFactory(transportFactory)
 	}
 
-	if err := runServer(transportFactory, protocolFactory, *addr, *secure); err != nil {
+	if err := runServer(transportFactory, *transport, protocolFactory, *addr, *secure); err != nil {
 		fmt.Println("error running server:", err)
 	}
 

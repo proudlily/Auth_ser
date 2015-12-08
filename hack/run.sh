@@ -8,5 +8,5 @@ while [ -h "$SOURCE"  ]; do # resolve $SOURCE until the file is no longer a syml
 done
 DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
-go build -o "$DIR/../_out/main" github.com/asyoume/Auth/pkg 
-"$DIR/../_out/main"
+go build -o "$DIR/../_out/thrift_ser" github.com/asyoume/Auth/pkg/thrift_ser
+"$DIR/../_out/thrift_ser"  -P $1 -transport $2 -buffered $3 -framed $4 
