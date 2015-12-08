@@ -1,11 +1,5 @@
 namespace go User
 
-service UserSer {
-	string Register(1:string u)
-	string Login(1:string key, 2:string pwd)
-	string Logout(1:string key)
-}
-
 typedef i64 Timestamp
 
 struct User {
@@ -55,3 +49,10 @@ struct UserAttributes {
   33: optional  bool useEmailAutoFiling,
   34: optional  i32 reminderEmailConfig
 }
+
+service UserSer {
+  string Register(1:string u)
+  string Login(1:string key, 2:string pwd)
+  string Logout(1:string key)
+}
+

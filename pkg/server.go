@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"git.apache.org/thrift.git/lib/go/thrift"
 	"github.com/asyoume/Auth/pkg/handler"
-	"github.com/asyoume/Auth/thrift-go/User"
+	"github.com/asyoume/Auth/thrift_go/User"
 )
 
 func runServer(transportFactory thrift.TTransportFactory, protocolFactory thrift.TProtocolFactory, addr string, secure bool) error {

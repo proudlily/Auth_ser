@@ -8,6 +8,6 @@ while [ -h "$SOURCE"  ]; do # resolve $SOURCE until the file is no longer a syml
 done
 DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
-thrift -strict -out "$DIR/../thrift-go"  --gen go "$DIR/../api/UserSer.thrift"
-#thrift -strict -out ../thrift-js  --gen js ../api/authSer.thrift
+thrift -strict -out "$DIR/../thrift_go"  --gen go "$DIR/../api/UserSer.thrift"
+thrift -strict -out "$DIR/../thrift_android"  --gen java:android "$DIR/../api/UserSer.thrift"
 #thrift -strict -out ../thrift-js  --gen js ../api/authSer.thrift

@@ -2,7 +2,7 @@ package handler
 
 import (
 	"fmt"
-	//"github.com/asyoume/Auth/thrift-go/User"
+	//"github.com/asyoume/Auth/thrift_go/User"
 )
 
 type UserHandler struct {
