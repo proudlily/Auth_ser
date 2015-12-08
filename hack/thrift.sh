@@ -10,4 +10,4 @@ DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
 thrift -strict -out "$DIR/../thrift_go"  --gen go "$DIR/../api/UserSer.thrift"
 thrift -strict -out "$DIR/../thrift_android"  --gen java:android "$DIR/../api/UserSer.thrift"
-#thrift -strict -out ../thrift-js  --gen js ../api/authSer.thrift
+thrift -strict -out "$DIR/../thrift_js"  --gen js "$DIR/../api/UserSer.thrift"
