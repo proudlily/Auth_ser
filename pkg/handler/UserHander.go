@@ -9,8 +9,8 @@ type UserHandler struct {
 }
 
 func (this UserHandler) Register(u string) (r string, err error) {
-	fmt.Print("Register()\n")
-	return "Register result2", nil
+	fmt.Print("Register()\n" + u)
+	return "Register result2 " + u, nil
 }
 
 func (this UserHandler) Login(key, pwd string) (r string, err error) {
