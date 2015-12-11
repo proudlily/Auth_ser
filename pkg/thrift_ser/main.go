@@ -16,10 +16,10 @@ func Usage() {
 func main() {
 	flag.Usage = Usage
 	protocol := flag.String("P", "binary", "Specify the protocol (binary, compact, json, simplejson)")
-	transport := flag.String("transport", "binary", "Specify transport (framed, buffered, http, file, memory, zlib)")
+	transport := flag.String("transport", "binary", "Specify transport (framed, buffered, file, memory, zlib)")
 
-	framed := flag.Bool("framed", true, "Use framed transport")
-	buffered := flag.Bool("buffered", false, "Use buffered transport")
+	buffered := flag.String("buffered", "off", "Use buffered transport")
+	framed := flag.String("framed", "off", "Use framed transport")
 
 	addr := flag.String("addr", "localhost:9090", "Address to listen to")
 	secure := flag.Bool("secure", false, "Use tls secure transport")
@@ -45,13 +45,15 @@ func main() {
 
 	var transportFactory thrift.TTransportFactory
 
-	if *buffered {
+	if *buffered == "on" {
+		fmt.Println("buffered:", *buffered)
 		transportFactory = thrift.NewTBufferedTransportFactory(8192)
 	} else {
 		transportFactory = thrift.NewTTransportFactory()
 	}
 
-	if *framed {
+	if *framed == "on" {
+		fmt.Println("framed:", *framed)
 		transportFactory = thrift.NewTFramedTransportFactory(transportFactory)
 	}
 

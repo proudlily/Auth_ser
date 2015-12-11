@@ -8,5 +8,7 @@ while [ -h "$SOURCE"  ]; do # resolve $SOURCE until the file is no longer a syml
 done
 DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
+#build
 go build -o "$DIR/../_out/thrift_ser" github.com/asyoume/Auth/pkg/thrift_ser
-"$DIR/../_out/thrift_ser"  -P $1 -transport $2 -buffered $3 -framed $4 
+#run server
+"$DIR/../_out/thrift_ser"  -P $1 -transport $2  -addr $3 -framed  $4 -buffered $5

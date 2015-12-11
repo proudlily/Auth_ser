@@ -1,4 +1,5 @@
 namespace go User
+namespace java me.asyou.time
 
 typedef i64 Timestamp
 
