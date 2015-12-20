@@ -51,9 +51,28 @@ struct UserAttributes {
   34: optional  i32 reminderEmailConfig
 }
 
+
+
 service UserSer {
-  string Register(1:string u)
-  string Login(1:string key, 2:string pwd)
-  string Logout(1:string key)
+
+  /*网页直接操作api*/
+
+  string Register(1:string u, 2:string device_id)
+  string Login(1:string logkey, 2:string pwd, 3:string device_id)
+  string Logout(1:string key, 2:string device_id)
+
+  /*应用相关api*/
+
+  //通过第三方发起注册/登陆操作
+  string Register(1:string u, 2:string device_id, 3:string access_token)
+  string Login(1:string logkey, 2:string pwd, 3:string device_id, 4:string access_token)
+  //应用获取访问key
+  string AccessToken(1:string appid, 2:string secret)
+  //通过传入的appid去引导用户登陆获得一个临时授权的令牌
+  string Authorize(1:string appid, 2:string response_type, 3:string scope, 4:string state)
+  //通过appid,密码,临时授权令牌换取正式授权令牌
+  string Oauth2Token(1:string appid, 2:string secret, 3:string code)
+  //通过Oauth2Token和用户id获取信息
+  string UserInfo(1:string token, 2:string appid, 3:string openid)
 }
 
