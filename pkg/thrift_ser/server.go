@@ -26,6 +26,7 @@ func runServer(transportFactory thrift.TTransportFactory, transport_type string,
 	if err != nil {
 		return err
 	}
+
 	fmt.Printf("%T\n", transport)
 	uhandler := handler.UserHandler{}
 	processor := User.NewUserSerProcessor(uhandler)

@@ -20,9 +20,15 @@ func Usage() {
 	fmt.Fprintln(os.Stderr, "Usage of ", os.Args[0], " [-h host:port] [-u url] [-f[ramed]] function [arg1 [arg2...]]:")
 	flag.PrintDefaults()
 	fmt.Fprintln(os.Stderr, "\nFunctions:")
-	fmt.Fprintln(os.Stderr, "  string Register(string u)")
-	fmt.Fprintln(os.Stderr, "  string Login(string key, string pwd)")
-	fmt.Fprintln(os.Stderr, "  string Logout(string key)")
+	fmt.Fprintln(os.Stderr, "  string Register(string u, string device_id)")
+	fmt.Fprintln(os.Stderr, "  string Login(string logkey, string pwd, string device_id)")
+	fmt.Fprintln(os.Stderr, "  string Logout(string key, string device_id)")
+	fmt.Fprintln(os.Stderr, "  string AppRegister(string u, string device_id, string access_token)")
+	fmt.Fprintln(os.Stderr, "  string AppLogin(string logkey, string pwd, string device_id, string access_token)")
+	fmt.Fprintln(os.Stderr, "  string AccessToken(string appid, string secret)")
+	fmt.Fprintln(os.Stderr, "  string Authorize(string appid, string response_type, string scope, string state)")
+	fmt.Fprintln(os.Stderr, "  string Oauth2Token(string appid, string secret, string code)")
+	fmt.Fprintln(os.Stderr, "  string UserInfo(string token, string appid, string openid)")
 	fmt.Fprintln(os.Stderr)
 	os.Exit(0)
 }
@@ -118,35 +124,127 @@ func main() {
 
 	switch cmd {
 	case "Register":
-		if flag.NArg()-1 != 1 {
-			fmt.Fprintln(os.Stderr, "Register requires 1 args")
-			flag.Usage()
-		}
-		argvalue0 := flag.Arg(1)
-		value0 := argvalue0
-		fmt.Print(client.Register(value0))
-		fmt.Print("\n")
-		break
-	case "Login":
 		if flag.NArg()-1 != 2 {
-			fmt.Fprintln(os.Stderr, "Login requires 2 args")
+			fmt.Fprintln(os.Stderr, "Register requires 2 args")
 			flag.Usage()
 		}
 		argvalue0 := flag.Arg(1)
 		value0 := argvalue0
 		argvalue1 := flag.Arg(2)
 		value1 := argvalue1
-		fmt.Print(client.Login(value0, value1))
+		fmt.Print(client.Register(value0, value1))
 		fmt.Print("\n")
 		break
-	case "Logout":
-		if flag.NArg()-1 != 1 {
-			fmt.Fprintln(os.Stderr, "Logout requires 1 args")
+	case "Login":
+		if flag.NArg()-1 != 3 {
+			fmt.Fprintln(os.Stderr, "Login requires 3 args")
 			flag.Usage()
 		}
 		argvalue0 := flag.Arg(1)
 		value0 := argvalue0
-		fmt.Print(client.Logout(value0))
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		argvalue2 := flag.Arg(3)
+		value2 := argvalue2
+		fmt.Print(client.Login(value0, value1, value2))
+		fmt.Print("\n")
+		break
+	case "Logout":
+		if flag.NArg()-1 != 2 {
+			fmt.Fprintln(os.Stderr, "Logout requires 2 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		fmt.Print(client.Logout(value0, value1))
+		fmt.Print("\n")
+		break
+	case "AppRegister":
+		if flag.NArg()-1 != 3 {
+			fmt.Fprintln(os.Stderr, "AppRegister requires 3 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		argvalue2 := flag.Arg(3)
+		value2 := argvalue2
+		fmt.Print(client.AppRegister(value0, value1, value2))
+		fmt.Print("\n")
+		break
+	case "AppLogin":
+		if flag.NArg()-1 != 4 {
+			fmt.Fprintln(os.Stderr, "AppLogin requires 4 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		argvalue2 := flag.Arg(3)
+		value2 := argvalue2
+		argvalue3 := flag.Arg(4)
+		value3 := argvalue3
+		fmt.Print(client.AppLogin(value0, value1, value2, value3))
+		fmt.Print("\n")
+		break
+	case "AccessToken":
+		if flag.NArg()-1 != 2 {
+			fmt.Fprintln(os.Stderr, "AccessToken requires 2 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		fmt.Print(client.AccessToken(value0, value1))
+		fmt.Print("\n")
+		break
+	case "Authorize":
+		if flag.NArg()-1 != 4 {
+			fmt.Fprintln(os.Stderr, "Authorize requires 4 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		argvalue2 := flag.Arg(3)
+		value2 := argvalue2
+		argvalue3 := flag.Arg(4)
+		value3 := argvalue3
+		fmt.Print(client.Authorize(value0, value1, value2, value3))
+		fmt.Print("\n")
+		break
+	case "Oauth2Token":
+		if flag.NArg()-1 != 3 {
+			fmt.Fprintln(os.Stderr, "Oauth2Token requires 3 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		argvalue2 := flag.Arg(3)
+		value2 := argvalue2
+		fmt.Print(client.Oauth2Token(value0, value1, value2))
+		fmt.Print("\n")
+		break
+	case "UserInfo":
+		if flag.NArg()-1 != 3 {
+			fmt.Fprintln(os.Stderr, "UserInfo requires 3 args")
+			flag.Usage()
+		}
+		argvalue0 := flag.Arg(1)
+		value0 := argvalue0
+		argvalue1 := flag.Arg(2)
+		value1 := argvalue1
+		argvalue2 := flag.Arg(3)
+		value2 := argvalue2
+		fmt.Print(client.UserInfo(value0, value1, value2))
 		fmt.Print("\n")
 		break
 	case "":

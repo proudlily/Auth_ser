@@ -11,7 +11,7 @@ import (
 var uhander = handler.UserHandler{}
 
 func UserRegister(c *echo.Context) error {
-	r, err := uhander.Register(c.Query("u"))
+	r, err := uhander.Register(c.Query("u"), "")
 	if err == nil {
 		return c.String(http.StatusOK, r)
 	} else {
@@ -20,7 +20,7 @@ func UserRegister(c *echo.Context) error {
 }
 
 func UserLogin(c *echo.Context) error {
-	r, err := uhander.Register(c.Value("u").(string))
+	r, err := uhander.Register(c.Value("u").(string), "")
 	if err == nil {
 		return c.String(http.StatusOK, r)
 	} else {

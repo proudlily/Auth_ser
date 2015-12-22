@@ -64,8 +64,8 @@ service UserSer {
   /*应用相关api*/
 
   //通过第三方发起注册/登陆操作
-  string Register(1:string u, 2:string device_id, 3:string access_token)
-  string Login(1:string logkey, 2:string pwd, 3:string device_id, 4:string access_token)
+  string AppRegister(1:string u, 2:string device_id, 3:string access_token)
+  string AppLogin(1:string logkey, 2:string pwd, 3:string device_id, 4:string access_token)
   //应用获取访问key
   string AccessToken(1:string appid, 2:string secret)
   //通过传入的appid去引导用户登陆获得一个临时授权的令牌
