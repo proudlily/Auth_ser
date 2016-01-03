@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/asyoume/Auth/pkg/handler"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
@@ -20,7 +21,9 @@ func UserRegister(c *echo.Context) error {
 }
 
 func UserLogin(c *echo.Context) error {
-	r, err := uhander.Register(c.Value("u").(string), "")
+	r, err := uhander.Register(c.Form("name"), "")
+
+	fmt.Println(err)
 	if err == nil {
 		return c.String(http.StatusOK, r)
 	} else {
@@ -29,6 +32,7 @@ func UserLogin(c *echo.Context) error {
 }
 
 func main() {
+	handler.Init()
 	e := echo.New()
 	e.Use(mw.Logger())
 	e.Use(mw.Recover())
@@ -36,7 +40,7 @@ func main() {
 	e.Use(cors.Default().Handler)
 
 	// Routes
-	e.Get("/Register", UserRegister)
+	e.Post("/Login", UserLogin)
 	e.Get("/Register", UserRegister)
 	e.Run(":9091")
 }

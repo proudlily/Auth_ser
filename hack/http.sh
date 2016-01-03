@@ -8,16 +8,12 @@ while [ -h "$SOURCE"  ]; do # resolve $SOURCE until the file is no longer a syml
 done
 DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
-count=`ps -ef |grep http_ser |grep -v "grep" |wc -l`
-if [  $count > 0 ];then
-    killall -9 http_ser
-fi
+killall -9 http_ser
 
-
-out=`go build -o "$DIR/../_out/http_ser" github.com/asyoume/Auth/pkg/http_ser  2>&1 >/dev/null`
+out=`go build -o "$DIR/../_out/http_ser" github.com/asyoume/Auth/pkg/ser_http  2>&1 >/dev/null`
 
 if [ $? -eq 0 ];then
-   echo  -e  "\033[32m程序编译成功,开始执行命令\033[0m"
+   echo  -e  "\033[32m程序编译成功,开始执行\033[0m"
    "$DIR/../_out/http_ser"
 else
     echo  -e  "\033[31m程序编译出错,请检查代码哦\033[0m"

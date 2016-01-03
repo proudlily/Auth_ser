@@ -14,10 +14,10 @@ struct User {
   11: optional  Timestamp deleted,
   13: optional  bool active,
   14: optional  string shardId,
-  15: optional  UserAttributes attributes,
+  15: optional  UserAttr attr,
 }
 
-struct UserAttributes {
+struct UserAttr {
   1:  optional  string defaultLocationName,
   2:  optional  double defaultLatitude,
   3:  optional  double defaultLongitude,

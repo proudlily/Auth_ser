@@ -31,7 +31,7 @@ func TimestampPtr(v Timestamp) *Timestamp { return &v }
 //  - Deleted
 //  - Active
 //  - ShardId
-//  - Attributes
+//  - Attr
 type User struct {
 	ID       string `thrift:"id,1,required" json:"id"`
 	Username string `thrift:"username,2,required" json:"username"`
@@ -44,9 +44,9 @@ type User struct {
 	Updated *Timestamp `thrift:"updated,10" json:"updated,omitempty"`
 	Deleted *Timestamp `thrift:"deleted,11" json:"deleted,omitempty"`
 	// unused field # 12
-	Active     *bool           `thrift:"active,13" json:"active,omitempty"`
-	ShardId    *string         `thrift:"shardId,14" json:"shardId,omitempty"`
-	Attributes *UserAttributes `thrift:"attributes,15" json:"attributes,omitempty"`
+	Active  *bool     `thrift:"active,13" json:"active,omitempty"`
+	ShardId *string   `thrift:"shardId,14" json:"shardId,omitempty"`
+	Attr    *UserAttr `thrift:"attr,15" json:"attr,omitempty"`
 }
 
 func NewUser() *User {
@@ -123,13 +123,13 @@ func (p *User) GetShardId() string {
 	return *p.ShardId
 }
 
-var User_Attributes_DEFAULT UserAttributes
+var User_Attr_DEFAULT UserAttr
 
-func (p *User) GetAttributes() UserAttributes {
-	if !p.IsSetAttributes() {
-		return User_Attributes_DEFAULT
+func (p *User) GetAttr() UserAttr {
+	if !p.IsSetAttr() {
+		return User_Attr_DEFAULT
 	}
-	return *p.Attributes
+	return *p.Attr
 }
 func (p *User) IsSetTimezone() bool {
 	return p.Timezone != nil
@@ -155,8 +155,8 @@ func (p *User) IsSetShardId() bool {
 	return p.ShardId != nil
 }
 
-func (p *User) IsSetAttributes() bool {
-	return p.Attributes != nil
+func (p *User) IsSetAttr() bool {
+	return p.Attr != nil
 }
 
 func (p *User) Read(iprot thrift.TProtocol) error {
@@ -347,9 +347,9 @@ func (p *User) readField14(iprot thrift.TProtocol) error {
 }
 
 func (p *User) readField15(iprot thrift.TProtocol) error {
-	p.Attributes = &UserAttributes{}
-	if err := p.Attributes.Read(iprot); err != nil {
-		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Attributes), err)
+	p.Attr = &UserAttr{}
+	if err := p.Attr.Read(iprot); err != nil {
+		return thrift.PrependError(fmt.Sprintf("%T error reading struct: ", p.Attr), err)
 	}
 	return nil
 }
@@ -543,15 +543,15 @@ func (p *User) writeField14(oprot thrift.TProtocol) (err error) {
 }
 
 func (p *User) writeField15(oprot thrift.TProtocol) (err error) {
-	if p.IsSetAttributes() {
-		if err := oprot.WriteFieldBegin("attributes", thrift.STRUCT, 15); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field begin error 15:attributes: ", p), err)
+	if p.IsSetAttr() {
+		if err := oprot.WriteFieldBegin("attr", thrift.STRUCT, 15); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T write field begin error 15:attr: ", p), err)
 		}
-		if err := p.Attributes.Write(oprot); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Attributes), err)
+		if err := p.Attr.Write(oprot); err != nil {
+			return thrift.PrependError(fmt.Sprintf("%T error writing struct: ", p.Attr), err)
 		}
 		if err := oprot.WriteFieldEnd(); err != nil {
-			return thrift.PrependError(fmt.Sprintf("%T write field end error 15:attributes: ", p), err)
+			return thrift.PrependError(fmt.Sprintf("%T write field end error 15:attr: ", p), err)
 		}
 	}
 	return err
@@ -596,7 +596,7 @@ func (p *User) String() string {
 //  - TaxExempt
 //  - UseEmailAutoFiling
 //  - ReminderEmailConfig
-type UserAttributes struct {
+type UserAttr struct {
 	DefaultLocationName   *string  `thrift:"defaultLocationName,1" json:"defaultLocationName,omitempty"`
 	DefaultLatitude       *float64 `thrift:"defaultLatitude,2" json:"defaultLatitude,omitempty"`
 	DefaultLongitude      *float64 `thrift:"defaultLongitude,3" json:"defaultLongitude,omitempty"`
@@ -633,407 +633,407 @@ type UserAttributes struct {
 	ReminderEmailConfig *int32  `thrift:"reminderEmailConfig,34" json:"reminderEmailConfig,omitempty"`
 }
 
-func NewUserAttributes() *UserAttributes {
-	return &UserAttributes{}
+func NewUserAttr() *UserAttr {
+	return &UserAttr{}
 }
 
-var UserAttributes_DefaultLocationName_DEFAULT string
+var UserAttr_DefaultLocationName_DEFAULT string
 
-func (p *UserAttributes) GetDefaultLocationName() string {
+func (p *UserAttr) GetDefaultLocationName() string {
 	if !p.IsSetDefaultLocationName() {
-		return UserAttributes_DefaultLocationName_DEFAULT
+		return UserAttr_DefaultLocationName_DEFAULT
 	}
 	return *p.DefaultLocationName
 }
 
-var UserAttributes_DefaultLatitude_DEFAULT float64
+var UserAttr_DefaultLatitude_DEFAULT float64
 
-func (p *UserAttributes) GetDefaultLatitude() float64 {
+func (p *UserAttr) GetDefaultLatitude() float64 {
 	if !p.IsSetDefaultLatitude() {
-		return UserAttributes_DefaultLatitude_DEFAULT
+		return UserAttr_DefaultLatitude_DEFAULT
 	}
 	return *p.DefaultLatitude
 }
 
-var UserAttributes_DefaultLongitude_DEFAULT float64
+var UserAttr_DefaultLongitude_DEFAULT float64
 
-func (p *UserAttributes) GetDefaultLongitude() float64 {
+func (p *UserAttr) GetDefaultLongitude() float64 {
 	if !p.IsSetDefaultLongitude() {
-		return UserAttributes_DefaultLongitude_DEFAULT
+		return UserAttr_DefaultLongitude_DEFAULT
 	}
 	return *p.DefaultLongitude
 }
 
-var UserAttributes_Preactivation_DEFAULT bool
+var UserAttr_Preactivation_DEFAULT bool
 
-func (p *UserAttributes) GetPreactivation() bool {
+func (p *UserAttr) GetPreactivation() bool {
 	if !p.IsSetPreactivation() {
-		return UserAttributes_Preactivation_DEFAULT
+		return UserAttr_Preactivation_DEFAULT
 	}
 	return *p.Preactivation
 }
 
-var UserAttributes_ViewedPromotions_DEFAULT []string
+var UserAttr_ViewedPromotions_DEFAULT []string
 
-func (p *UserAttributes) GetViewedPromotions() []string {
+func (p *UserAttr) GetViewedPromotions() []string {
 	return p.ViewedPromotions
 }
 
-var UserAttributes_IncomingEmailAddress_DEFAULT string
+var UserAttr_IncomingEmailAddress_DEFAULT string
 
-func (p *UserAttributes) GetIncomingEmailAddress() string {
+func (p *UserAttr) GetIncomingEmailAddress() string {
 	if !p.IsSetIncomingEmailAddress() {
-		return UserAttributes_IncomingEmailAddress_DEFAULT
+		return UserAttr_IncomingEmailAddress_DEFAULT
 	}
 	return *p.IncomingEmailAddress
 }
 
-var UserAttributes_RecentMailedAddresses_DEFAULT []string
+var UserAttr_RecentMailedAddresses_DEFAULT []string
 
-func (p *UserAttributes) GetRecentMailedAddresses() []string {
+func (p *UserAttr) GetRecentMailedAddresses() []string {
 	return p.RecentMailedAddresses
 }
 
-var UserAttributes_Comments_DEFAULT string
+var UserAttr_Comments_DEFAULT string
 
-func (p *UserAttributes) GetComments() string {
+func (p *UserAttr) GetComments() string {
 	if !p.IsSetComments() {
-		return UserAttributes_Comments_DEFAULT
+		return UserAttr_Comments_DEFAULT
 	}
 	return *p.Comments
 }
 
-var UserAttributes_DateAgreedToTermsOfService_DEFAULT Timestamp
+var UserAttr_DateAgreedToTermsOfService_DEFAULT Timestamp
 
-func (p *UserAttributes) GetDateAgreedToTermsOfService() Timestamp {
+func (p *UserAttr) GetDateAgreedToTermsOfService() Timestamp {
 	if !p.IsSetDateAgreedToTermsOfService() {
-		return UserAttributes_DateAgreedToTermsOfService_DEFAULT
+		return UserAttr_DateAgreedToTermsOfService_DEFAULT
 	}
 	return *p.DateAgreedToTermsOfService
 }
 
-var UserAttributes_MaxReferrals_DEFAULT int32
+var UserAttr_MaxReferrals_DEFAULT int32
 
-func (p *UserAttributes) GetMaxReferrals() int32 {
+func (p *UserAttr) GetMaxReferrals() int32 {
 	if !p.IsSetMaxReferrals() {
-		return UserAttributes_MaxReferrals_DEFAULT
+		return UserAttr_MaxReferrals_DEFAULT
 	}
 	return *p.MaxReferrals
 }
 
-var UserAttributes_ReferralCount_DEFAULT int32
+var UserAttr_ReferralCount_DEFAULT int32
 
-func (p *UserAttributes) GetReferralCount() int32 {
+func (p *UserAttr) GetReferralCount() int32 {
 	if !p.IsSetReferralCount() {
-		return UserAttributes_ReferralCount_DEFAULT
+		return UserAttr_ReferralCount_DEFAULT
 	}
 	return *p.ReferralCount
 }
 
-var UserAttributes_RefererCode_DEFAULT string
+var UserAttr_RefererCode_DEFAULT string
 
-func (p *UserAttributes) GetRefererCode() string {
+func (p *UserAttr) GetRefererCode() string {
 	if !p.IsSetRefererCode() {
-		return UserAttributes_RefererCode_DEFAULT
+		return UserAttr_RefererCode_DEFAULT
 	}
 	return *p.RefererCode
 }
 
-var UserAttributes_SentEmailDate_DEFAULT Timestamp
+var UserAttr_SentEmailDate_DEFAULT Timestamp
 
-func (p *UserAttributes) GetSentEmailDate() Timestamp {
+func (p *UserAttr) GetSentEmailDate() Timestamp {
 	if !p.IsSetSentEmailDate() {
-		return UserAttributes_SentEmailDate_DEFAULT
+		return UserAttr_SentEmailDate_DEFAULT
 	}
 	return *p.SentEmailDate
 }
 
-var UserAttributes_SentEmailCount_DEFAULT int32
+var UserAttr_SentEmailCount_DEFAULT int32
 
-func (p *UserAttributes) GetSentEmailCount() int32 {
+func (p *UserAttr) GetSentEmailCount() int32 {
 	if !p.IsSetSentEmailCount() {
-		return UserAttributes_SentEmailCount_DEFAULT
+		return UserAttr_SentEmailCount_DEFAULT
 	}
 	return *p.SentEmailCount
 }
 
-var UserAttributes_DailyEmailLimit_DEFAULT int32
+var UserAttr_DailyEmailLimit_DEFAULT int32
 
-func (p *UserAttributes) GetDailyEmailLimit() int32 {
+func (p *UserAttr) GetDailyEmailLimit() int32 {
 	if !p.IsSetDailyEmailLimit() {
-		return UserAttributes_DailyEmailLimit_DEFAULT
+		return UserAttr_DailyEmailLimit_DEFAULT
 	}
 	return *p.DailyEmailLimit
 }
 
-var UserAttributes_EmailOptOutDate_DEFAULT Timestamp
+var UserAttr_EmailOptOutDate_DEFAULT Timestamp
 
-func (p *UserAttributes) GetEmailOptOutDate() Timestamp {
+func (p *UserAttr) GetEmailOptOutDate() Timestamp {
 	if !p.IsSetEmailOptOutDate() {
-		return UserAttributes_EmailOptOutDate_DEFAULT
+		return UserAttr_EmailOptOutDate_DEFAULT
 	}
 	return *p.EmailOptOutDate
 }
 
-var UserAttributes_PartnerEmailOptInDate_DEFAULT Timestamp
+var UserAttr_PartnerEmailOptInDate_DEFAULT Timestamp
 
-func (p *UserAttributes) GetPartnerEmailOptInDate() Timestamp {
+func (p *UserAttr) GetPartnerEmailOptInDate() Timestamp {
 	if !p.IsSetPartnerEmailOptInDate() {
-		return UserAttributes_PartnerEmailOptInDate_DEFAULT
+		return UserAttr_PartnerEmailOptInDate_DEFAULT
 	}
 	return *p.PartnerEmailOptInDate
 }
 
-var UserAttributes_PreferredLanguage_DEFAULT string
+var UserAttr_PreferredLanguage_DEFAULT string
 
-func (p *UserAttributes) GetPreferredLanguage() string {
+func (p *UserAttr) GetPreferredLanguage() string {
 	if !p.IsSetPreferredLanguage() {
-		return UserAttributes_PreferredLanguage_DEFAULT
+		return UserAttr_PreferredLanguage_DEFAULT
 	}
 	return *p.PreferredLanguage
 }
 
-var UserAttributes_PreferredCountry_DEFAULT string
+var UserAttr_PreferredCountry_DEFAULT string
 
-func (p *UserAttributes) GetPreferredCountry() string {
+func (p *UserAttr) GetPreferredCountry() string {
 	if !p.IsSetPreferredCountry() {
-		return UserAttributes_PreferredCountry_DEFAULT
+		return UserAttr_PreferredCountry_DEFAULT
 	}
 	return *p.PreferredCountry
 }
 
-var UserAttributes_ClipFullPage_DEFAULT bool
+var UserAttr_ClipFullPage_DEFAULT bool
 
-func (p *UserAttributes) GetClipFullPage() bool {
+func (p *UserAttr) GetClipFullPage() bool {
 	if !p.IsSetClipFullPage() {
-		return UserAttributes_ClipFullPage_DEFAULT
+		return UserAttr_ClipFullPage_DEFAULT
 	}
 	return *p.ClipFullPage
 }
 
-var UserAttributes_TwitterUserName_DEFAULT string
+var UserAttr_TwitterUserName_DEFAULT string
 
-func (p *UserAttributes) GetTwitterUserName() string {
+func (p *UserAttr) GetTwitterUserName() string {
 	if !p.IsSetTwitterUserName() {
-		return UserAttributes_TwitterUserName_DEFAULT
+		return UserAttr_TwitterUserName_DEFAULT
 	}
 	return *p.TwitterUserName
 }
 
-var UserAttributes_TwitterId_DEFAULT string
+var UserAttr_TwitterId_DEFAULT string
 
-func (p *UserAttributes) GetTwitterId() string {
+func (p *UserAttr) GetTwitterId() string {
 	if !p.IsSetTwitterId() {
-		return UserAttributes_TwitterId_DEFAULT
+		return UserAttr_TwitterId_DEFAULT
 	}
 	return *p.TwitterId
 }
 
-var UserAttributes_GroupName_DEFAULT string
+var UserAttr_GroupName_DEFAULT string
 
-func (p *UserAttributes) GetGroupName() string {
+func (p *UserAttr) GetGroupName() string {
 	if !p.IsSetGroupName() {
-		return UserAttributes_GroupName_DEFAULT
+		return UserAttr_GroupName_DEFAULT
 	}
 	return *p.GroupName
 }
 
-var UserAttributes_RecognitionLanguage_DEFAULT string
+var UserAttr_RecognitionLanguage_DEFAULT string
 
-func (p *UserAttributes) GetRecognitionLanguage() string {
+func (p *UserAttr) GetRecognitionLanguage() string {
 	if !p.IsSetRecognitionLanguage() {
-		return UserAttributes_RecognitionLanguage_DEFAULT
+		return UserAttr_RecognitionLanguage_DEFAULT
 	}
 	return *p.RecognitionLanguage
 }
 
-var UserAttributes_ReferralProof_DEFAULT string
+var UserAttr_ReferralProof_DEFAULT string
 
-func (p *UserAttributes) GetReferralProof() string {
+func (p *UserAttr) GetReferralProof() string {
 	if !p.IsSetReferralProof() {
-		return UserAttributes_ReferralProof_DEFAULT
+		return UserAttr_ReferralProof_DEFAULT
 	}
 	return *p.ReferralProof
 }
 
-var UserAttributes_EducationalDiscount_DEFAULT bool
+var UserAttr_EducationalDiscount_DEFAULT bool
 
-func (p *UserAttributes) GetEducationalDiscount() bool {
+func (p *UserAttr) GetEducationalDiscount() bool {
 	if !p.IsSetEducationalDiscount() {
-		return UserAttributes_EducationalDiscount_DEFAULT
+		return UserAttr_EducationalDiscount_DEFAULT
 	}
 	return *p.EducationalDiscount
 }
 
-var UserAttributes_BusinessAddress_DEFAULT string
+var UserAttr_BusinessAddress_DEFAULT string
 
-func (p *UserAttributes) GetBusinessAddress() string {
+func (p *UserAttr) GetBusinessAddress() string {
 	if !p.IsSetBusinessAddress() {
-		return UserAttributes_BusinessAddress_DEFAULT
+		return UserAttr_BusinessAddress_DEFAULT
 	}
 	return *p.BusinessAddress
 }
 
-var UserAttributes_HideSponsorBilling_DEFAULT bool
+var UserAttr_HideSponsorBilling_DEFAULT bool
 
-func (p *UserAttributes) GetHideSponsorBilling() bool {
+func (p *UserAttr) GetHideSponsorBilling() bool {
 	if !p.IsSetHideSponsorBilling() {
-		return UserAttributes_HideSponsorBilling_DEFAULT
+		return UserAttr_HideSponsorBilling_DEFAULT
 	}
 	return *p.HideSponsorBilling
 }
 
-var UserAttributes_TaxExempt_DEFAULT bool
+var UserAttr_TaxExempt_DEFAULT bool
 
-func (p *UserAttributes) GetTaxExempt() bool {
+func (p *UserAttr) GetTaxExempt() bool {
 	if !p.IsSetTaxExempt() {
-		return UserAttributes_TaxExempt_DEFAULT
+		return UserAttr_TaxExempt_DEFAULT
 	}
 	return *p.TaxExempt
 }
 
-var UserAttributes_UseEmailAutoFiling_DEFAULT bool
+var UserAttr_UseEmailAutoFiling_DEFAULT bool
 
-func (p *UserAttributes) GetUseEmailAutoFiling() bool {
+func (p *UserAttr) GetUseEmailAutoFiling() bool {
 	if !p.IsSetUseEmailAutoFiling() {
-		return UserAttributes_UseEmailAutoFiling_DEFAULT
+		return UserAttr_UseEmailAutoFiling_DEFAULT
 	}
 	return *p.UseEmailAutoFiling
 }
 
-var UserAttributes_ReminderEmailConfig_DEFAULT int32
+var UserAttr_ReminderEmailConfig_DEFAULT int32
 
-func (p *UserAttributes) GetReminderEmailConfig() int32 {
+func (p *UserAttr) GetReminderEmailConfig() int32 {
 	if !p.IsSetReminderEmailConfig() {
-		return UserAttributes_ReminderEmailConfig_DEFAULT
+		return UserAttr_ReminderEmailConfig_DEFAULT
 	}
 	return *p.ReminderEmailConfig
 }
-func (p *UserAttributes) IsSetDefaultLocationName() bool {
+func (p *UserAttr) IsSetDefaultLocationName() bool {
 	return p.DefaultLocationName != nil
 }
 
-func (p *UserAttributes) IsSetDefaultLatitude() bool {
+func (p *UserAttr) IsSetDefaultLatitude() bool {
 	return p.DefaultLatitude != nil
 }
 
-func (p *UserAttributes) IsSetDefaultLongitude() bool {
+func (p *UserAttr) IsSetDefaultLongitude() bool {
 	return p.DefaultLongitude != nil
 }
 
-func (p *UserAttributes) IsSetPreactivation() bool {
+func (p *UserAttr) IsSetPreactivation() bool {
 	return p.Preactivation != nil
 }
 
-func (p *UserAttributes) IsSetViewedPromotions() bool {
+func (p *UserAttr) IsSetViewedPromotions() bool {
 	return p.ViewedPromotions != nil
 }
 
-func (p *UserAttributes) IsSetIncomingEmailAddress() bool {
+func (p *UserAttr) IsSetIncomingEmailAddress() bool {
 	return p.IncomingEmailAddress != nil
 }
 
-func (p *UserAttributes) IsSetRecentMailedAddresses() bool {
+func (p *UserAttr) IsSetRecentMailedAddresses() bool {
 	return p.RecentMailedAddresses != nil
 }
 
-func (p *UserAttributes) IsSetComments() bool {
+func (p *UserAttr) IsSetComments() bool {
 	return p.Comments != nil
 }
 
-func (p *UserAttributes) IsSetDateAgreedToTermsOfService() bool {
+func (p *UserAttr) IsSetDateAgreedToTermsOfService() bool {
 	return p.DateAgreedToTermsOfService != nil
 }
 
-func (p *UserAttributes) IsSetMaxReferrals() bool {
+func (p *UserAttr) IsSetMaxReferrals() bool {
 	return p.MaxReferrals != nil
 }
 
-func (p *UserAttributes) IsSetReferralCount() bool {
+func (p *UserAttr) IsSetReferralCount() bool {
 	return p.ReferralCount != nil
 }
 
-func (p *UserAttributes) IsSetRefererCode() bool {
+func (p *UserAttr) IsSetRefererCode() bool {
 	return p.RefererCode != nil
 }
 
-func (p *UserAttributes) IsSetSentEmailDate() bool {
+func (p *UserAttr) IsSetSentEmailDate() bool {
 	return p.SentEmailDate != nil
 }
 
-func (p *UserAttributes) IsSetSentEmailCount() bool {
+func (p *UserAttr) IsSetSentEmailCount() bool {
 	return p.SentEmailCount != nil
 }
 
-func (p *UserAttributes) IsSetDailyEmailLimit() bool {
+func (p *UserAttr) IsSetDailyEmailLimit() bool {
 	return p.DailyEmailLimit != nil
 }
 
-func (p *UserAttributes) IsSetEmailOptOutDate() bool {
+func (p *UserAttr) IsSetEmailOptOutDate() bool {
 	return p.EmailOptOutDate != nil
 }
 
-func (p *UserAttributes) IsSetPartnerEmailOptInDate() bool {
+func (p *UserAttr) IsSetPartnerEmailOptInDate() bool {
 	return p.PartnerEmailOptInDate != nil
 }
 
-func (p *UserAttributes) IsSetPreferredLanguage() bool {
+func (p *UserAttr) IsSetPreferredLanguage() bool {
 	return p.PreferredLanguage != nil
 }
 
-func (p *UserAttributes) IsSetPreferredCountry() bool {
+func (p *UserAttr) IsSetPreferredCountry() bool {
 	return p.PreferredCountry != nil
 }
 
-func (p *UserAttributes) IsSetClipFullPage() bool {
+func (p *UserAttr) IsSetClipFullPage() bool {
 	return p.ClipFullPage != nil
 }
 
-func (p *UserAttributes) IsSetTwitterUserName() bool {
+func (p *UserAttr) IsSetTwitterUserName() bool {
 	return p.TwitterUserName != nil
 }
 
-func (p *UserAttributes) IsSetTwitterId() bool {
+func (p *UserAttr) IsSetTwitterId() bool {
 	return p.TwitterId != nil
 }
 
-func (p *UserAttributes) IsSetGroupName() bool {
+func (p *UserAttr) IsSetGroupName() bool {
 	return p.GroupName != nil
 }
 
-func (p *UserAttributes) IsSetRecognitionLanguage() bool {
+func (p *UserAttr) IsSetRecognitionLanguage() bool {
 	return p.RecognitionLanguage != nil
 }
 
-func (p *UserAttributes) IsSetReferralProof() bool {
+func (p *UserAttr) IsSetReferralProof() bool {
 	return p.ReferralProof != nil
 }
 
-func (p *UserAttributes) IsSetEducationalDiscount() bool {
+func (p *UserAttr) IsSetEducationalDiscount() bool {
 	return p.EducationalDiscount != nil
 }
 
-func (p *UserAttributes) IsSetBusinessAddress() bool {
+func (p *UserAttr) IsSetBusinessAddress() bool {
 	return p.BusinessAddress != nil
 }
 
-func (p *UserAttributes) IsSetHideSponsorBilling() bool {
+func (p *UserAttr) IsSetHideSponsorBilling() bool {
 	return p.HideSponsorBilling != nil
 }
 
-func (p *UserAttributes) IsSetTaxExempt() bool {
+func (p *UserAttr) IsSetTaxExempt() bool {
 	return p.TaxExempt != nil
 }
 
-func (p *UserAttributes) IsSetUseEmailAutoFiling() bool {
+func (p *UserAttr) IsSetUseEmailAutoFiling() bool {
 	return p.UseEmailAutoFiling != nil
 }
 
-func (p *UserAttributes) IsSetReminderEmailConfig() bool {
+func (p *UserAttr) IsSetReminderEmailConfig() bool {
 	return p.ReminderEmailConfig != nil
 }
 
-func (p *UserAttributes) Read(iprot thrift.TProtocol) error {
+func (p *UserAttr) Read(iprot thrift.TProtocol) error {
 	if _, err := iprot.ReadStructBegin(); err != nil {
 		return thrift.PrependError(fmt.Sprintf("%T read error: ", p), err)
 	}
@@ -1186,7 +1186,7 @@ func (p *UserAttributes) Read(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField1(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField1(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 1: ", err)
 	} else {
@@ -1195,7 +1195,7 @@ func (p *UserAttributes) readField1(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField2(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField2(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadDouble(); err != nil {
 		return thrift.PrependError("error reading field 2: ", err)
 	} else {
@@ -1204,7 +1204,7 @@ func (p *UserAttributes) readField2(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField3(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField3(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadDouble(); err != nil {
 		return thrift.PrependError("error reading field 3: ", err)
 	} else {
@@ -1213,7 +1213,7 @@ func (p *UserAttributes) readField3(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField4(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField4(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadBool(); err != nil {
 		return thrift.PrependError("error reading field 4: ", err)
 	} else {
@@ -1222,7 +1222,7 @@ func (p *UserAttributes) readField4(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField5(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField5(iprot thrift.TProtocol) error {
 	_, size, err := iprot.ReadListBegin()
 	if err != nil {
 		return thrift.PrependError("error reading list begin: ", err)
@@ -1244,7 +1244,7 @@ func (p *UserAttributes) readField5(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField6(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField6(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 6: ", err)
 	} else {
@@ -1253,7 +1253,7 @@ func (p *UserAttributes) readField6(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField7(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField7(iprot thrift.TProtocol) error {
 	_, size, err := iprot.ReadListBegin()
 	if err != nil {
 		return thrift.PrependError("error reading list begin: ", err)
@@ -1275,7 +1275,7 @@ func (p *UserAttributes) readField7(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField9(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField9(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 9: ", err)
 	} else {
@@ -1284,7 +1284,7 @@ func (p *UserAttributes) readField9(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField11(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField11(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI64(); err != nil {
 		return thrift.PrependError("error reading field 11: ", err)
 	} else {
@@ -1294,7 +1294,7 @@ func (p *UserAttributes) readField11(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField12(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField12(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI32(); err != nil {
 		return thrift.PrependError("error reading field 12: ", err)
 	} else {
@@ -1303,7 +1303,7 @@ func (p *UserAttributes) readField12(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField13(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField13(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI32(); err != nil {
 		return thrift.PrependError("error reading field 13: ", err)
 	} else {
@@ -1312,7 +1312,7 @@ func (p *UserAttributes) readField13(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField14(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField14(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 14: ", err)
 	} else {
@@ -1321,7 +1321,7 @@ func (p *UserAttributes) readField14(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField15(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField15(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI64(); err != nil {
 		return thrift.PrependError("error reading field 15: ", err)
 	} else {
@@ -1331,7 +1331,7 @@ func (p *UserAttributes) readField15(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField16(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField16(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI32(); err != nil {
 		return thrift.PrependError("error reading field 16: ", err)
 	} else {
@@ -1340,7 +1340,7 @@ func (p *UserAttributes) readField16(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField17(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField17(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI32(); err != nil {
 		return thrift.PrependError("error reading field 17: ", err)
 	} else {
@@ -1349,7 +1349,7 @@ func (p *UserAttributes) readField17(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField18(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField18(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI64(); err != nil {
 		return thrift.PrependError("error reading field 18: ", err)
 	} else {
@@ -1359,7 +1359,7 @@ func (p *UserAttributes) readField18(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField19(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField19(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI64(); err != nil {
 		return thrift.PrependError("error reading field 19: ", err)
 	} else {
@@ -1369,7 +1369,7 @@ func (p *UserAttributes) readField19(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField20(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField20(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 20: ", err)
 	} else {
@@ -1378,7 +1378,7 @@ func (p *UserAttributes) readField20(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField21(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField21(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 21: ", err)
 	} else {
@@ -1387,7 +1387,7 @@ func (p *UserAttributes) readField21(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField22(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField22(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadBool(); err != nil {
 		return thrift.PrependError("error reading field 22: ", err)
 	} else {
@@ -1396,7 +1396,7 @@ func (p *UserAttributes) readField22(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField23(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField23(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 23: ", err)
 	} else {
@@ -1405,7 +1405,7 @@ func (p *UserAttributes) readField23(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField24(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField24(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 24: ", err)
 	} else {
@@ -1414,7 +1414,7 @@ func (p *UserAttributes) readField24(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField25(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField25(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 25: ", err)
 	} else {
@@ -1423,7 +1423,7 @@ func (p *UserAttributes) readField25(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField26(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField26(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 26: ", err)
 	} else {
@@ -1432,7 +1432,7 @@ func (p *UserAttributes) readField26(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField28(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField28(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 28: ", err)
 	} else {
@@ -1441,7 +1441,7 @@ func (p *UserAttributes) readField28(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField29(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField29(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadBool(); err != nil {
 		return thrift.PrependError("error reading field 29: ", err)
 	} else {
@@ -1450,7 +1450,7 @@ func (p *UserAttributes) readField29(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField30(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField30(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadString(); err != nil {
 		return thrift.PrependError("error reading field 30: ", err)
 	} else {
@@ -1459,7 +1459,7 @@ func (p *UserAttributes) readField30(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField31(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField31(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadBool(); err != nil {
 		return thrift.PrependError("error reading field 31: ", err)
 	} else {
@@ -1468,7 +1468,7 @@ func (p *UserAttributes) readField31(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField32(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField32(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadBool(); err != nil {
 		return thrift.PrependError("error reading field 32: ", err)
 	} else {
@@ -1477,7 +1477,7 @@ func (p *UserAttributes) readField32(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField33(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField33(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadBool(); err != nil {
 		return thrift.PrependError("error reading field 33: ", err)
 	} else {
@@ -1486,7 +1486,7 @@ func (p *UserAttributes) readField33(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) readField34(iprot thrift.TProtocol) error {
+func (p *UserAttr) readField34(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI32(); err != nil {
 		return thrift.PrependError("error reading field 34: ", err)
 	} else {
@@ -1495,8 +1495,8 @@ func (p *UserAttributes) readField34(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) Write(oprot thrift.TProtocol) error {
-	if err := oprot.WriteStructBegin("UserAttributes"); err != nil {
+func (p *UserAttr) Write(oprot thrift.TProtocol) error {
+	if err := oprot.WriteStructBegin("UserAttr"); err != nil {
 		return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
 	}
 	if err := p.writeField1(oprot); err != nil {
@@ -1601,7 +1601,7 @@ func (p *UserAttributes) Write(oprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *UserAttributes) writeField1(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField1(oprot thrift.TProtocol) (err error) {
 	if p.IsSetDefaultLocationName() {
 		if err := oprot.WriteFieldBegin("defaultLocationName", thrift.STRING, 1); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 1:defaultLocationName: ", p), err)
@@ -1616,7 +1616,7 @@ func (p *UserAttributes) writeField1(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField2(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField2(oprot thrift.TProtocol) (err error) {
 	if p.IsSetDefaultLatitude() {
 		if err := oprot.WriteFieldBegin("defaultLatitude", thrift.DOUBLE, 2); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 2:defaultLatitude: ", p), err)
@@ -1631,7 +1631,7 @@ func (p *UserAttributes) writeField2(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField3(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField3(oprot thrift.TProtocol) (err error) {
 	if p.IsSetDefaultLongitude() {
 		if err := oprot.WriteFieldBegin("defaultLongitude", thrift.DOUBLE, 3); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 3:defaultLongitude: ", p), err)
@@ -1646,7 +1646,7 @@ func (p *UserAttributes) writeField3(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField4(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField4(oprot thrift.TProtocol) (err error) {
 	if p.IsSetPreactivation() {
 		if err := oprot.WriteFieldBegin("preactivation", thrift.BOOL, 4); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 4:preactivation: ", p), err)
@@ -1661,7 +1661,7 @@ func (p *UserAttributes) writeField4(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField5(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField5(oprot thrift.TProtocol) (err error) {
 	if p.IsSetViewedPromotions() {
 		if err := oprot.WriteFieldBegin("viewedPromotions", thrift.LIST, 5); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 5:viewedPromotions: ", p), err)
@@ -1684,7 +1684,7 @@ func (p *UserAttributes) writeField5(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField6(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField6(oprot thrift.TProtocol) (err error) {
 	if p.IsSetIncomingEmailAddress() {
 		if err := oprot.WriteFieldBegin("incomingEmailAddress", thrift.STRING, 6); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 6:incomingEmailAddress: ", p), err)
@@ -1699,7 +1699,7 @@ func (p *UserAttributes) writeField6(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField7(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField7(oprot thrift.TProtocol) (err error) {
 	if p.IsSetRecentMailedAddresses() {
 		if err := oprot.WriteFieldBegin("recentMailedAddresses", thrift.LIST, 7); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 7:recentMailedAddresses: ", p), err)
@@ -1722,7 +1722,7 @@ func (p *UserAttributes) writeField7(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField9(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField9(oprot thrift.TProtocol) (err error) {
 	if p.IsSetComments() {
 		if err := oprot.WriteFieldBegin("comments", thrift.STRING, 9); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 9:comments: ", p), err)
@@ -1737,7 +1737,7 @@ func (p *UserAttributes) writeField9(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField11(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField11(oprot thrift.TProtocol) (err error) {
 	if p.IsSetDateAgreedToTermsOfService() {
 		if err := oprot.WriteFieldBegin("dateAgreedToTermsOfService", thrift.I64, 11); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 11:dateAgreedToTermsOfService: ", p), err)
@@ -1752,7 +1752,7 @@ func (p *UserAttributes) writeField11(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField12(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField12(oprot thrift.TProtocol) (err error) {
 	if p.IsSetMaxReferrals() {
 		if err := oprot.WriteFieldBegin("maxReferrals", thrift.I32, 12); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 12:maxReferrals: ", p), err)
@@ -1767,7 +1767,7 @@ func (p *UserAttributes) writeField12(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField13(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField13(oprot thrift.TProtocol) (err error) {
 	if p.IsSetReferralCount() {
 		if err := oprot.WriteFieldBegin("referralCount", thrift.I32, 13); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 13:referralCount: ", p), err)
@@ -1782,7 +1782,7 @@ func (p *UserAttributes) writeField13(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField14(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField14(oprot thrift.TProtocol) (err error) {
 	if p.IsSetRefererCode() {
 		if err := oprot.WriteFieldBegin("refererCode", thrift.STRING, 14); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 14:refererCode: ", p), err)
@@ -1797,7 +1797,7 @@ func (p *UserAttributes) writeField14(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField15(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField15(oprot thrift.TProtocol) (err error) {
 	if p.IsSetSentEmailDate() {
 		if err := oprot.WriteFieldBegin("sentEmailDate", thrift.I64, 15); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 15:sentEmailDate: ", p), err)
@@ -1812,7 +1812,7 @@ func (p *UserAttributes) writeField15(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField16(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField16(oprot thrift.TProtocol) (err error) {
 	if p.IsSetSentEmailCount() {
 		if err := oprot.WriteFieldBegin("sentEmailCount", thrift.I32, 16); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 16:sentEmailCount: ", p), err)
@@ -1827,7 +1827,7 @@ func (p *UserAttributes) writeField16(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField17(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField17(oprot thrift.TProtocol) (err error) {
 	if p.IsSetDailyEmailLimit() {
 		if err := oprot.WriteFieldBegin("dailyEmailLimit", thrift.I32, 17); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 17:dailyEmailLimit: ", p), err)
@@ -1842,7 +1842,7 @@ func (p *UserAttributes) writeField17(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField18(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField18(oprot thrift.TProtocol) (err error) {
 	if p.IsSetEmailOptOutDate() {
 		if err := oprot.WriteFieldBegin("emailOptOutDate", thrift.I64, 18); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 18:emailOptOutDate: ", p), err)
@@ -1857,7 +1857,7 @@ func (p *UserAttributes) writeField18(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField19(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField19(oprot thrift.TProtocol) (err error) {
 	if p.IsSetPartnerEmailOptInDate() {
 		if err := oprot.WriteFieldBegin("partnerEmailOptInDate", thrift.I64, 19); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 19:partnerEmailOptInDate: ", p), err)
@@ -1872,7 +1872,7 @@ func (p *UserAttributes) writeField19(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField20(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField20(oprot thrift.TProtocol) (err error) {
 	if p.IsSetPreferredLanguage() {
 		if err := oprot.WriteFieldBegin("preferredLanguage", thrift.STRING, 20); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 20:preferredLanguage: ", p), err)
@@ -1887,7 +1887,7 @@ func (p *UserAttributes) writeField20(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField21(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField21(oprot thrift.TProtocol) (err error) {
 	if p.IsSetPreferredCountry() {
 		if err := oprot.WriteFieldBegin("preferredCountry", thrift.STRING, 21); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 21:preferredCountry: ", p), err)
@@ -1902,7 +1902,7 @@ func (p *UserAttributes) writeField21(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField22(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField22(oprot thrift.TProtocol) (err error) {
 	if p.IsSetClipFullPage() {
 		if err := oprot.WriteFieldBegin("clipFullPage", thrift.BOOL, 22); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 22:clipFullPage: ", p), err)
@@ -1917,7 +1917,7 @@ func (p *UserAttributes) writeField22(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField23(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField23(oprot thrift.TProtocol) (err error) {
 	if p.IsSetTwitterUserName() {
 		if err := oprot.WriteFieldBegin("twitterUserName", thrift.STRING, 23); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 23:twitterUserName: ", p), err)
@@ -1932,7 +1932,7 @@ func (p *UserAttributes) writeField23(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField24(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField24(oprot thrift.TProtocol) (err error) {
 	if p.IsSetTwitterId() {
 		if err := oprot.WriteFieldBegin("twitterId", thrift.STRING, 24); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 24:twitterId: ", p), err)
@@ -1947,7 +1947,7 @@ func (p *UserAttributes) writeField24(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField25(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField25(oprot thrift.TProtocol) (err error) {
 	if p.IsSetGroupName() {
 		if err := oprot.WriteFieldBegin("groupName", thrift.STRING, 25); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 25:groupName: ", p), err)
@@ -1962,7 +1962,7 @@ func (p *UserAttributes) writeField25(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField26(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField26(oprot thrift.TProtocol) (err error) {
 	if p.IsSetRecognitionLanguage() {
 		if err := oprot.WriteFieldBegin("recognitionLanguage", thrift.STRING, 26); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 26:recognitionLanguage: ", p), err)
@@ -1977,7 +1977,7 @@ func (p *UserAttributes) writeField26(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField28(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField28(oprot thrift.TProtocol) (err error) {
 	if p.IsSetReferralProof() {
 		if err := oprot.WriteFieldBegin("referralProof", thrift.STRING, 28); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 28:referralProof: ", p), err)
@@ -1992,7 +1992,7 @@ func (p *UserAttributes) writeField28(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField29(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField29(oprot thrift.TProtocol) (err error) {
 	if p.IsSetEducationalDiscount() {
 		if err := oprot.WriteFieldBegin("educationalDiscount", thrift.BOOL, 29); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 29:educationalDiscount: ", p), err)
@@ -2007,7 +2007,7 @@ func (p *UserAttributes) writeField29(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField30(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField30(oprot thrift.TProtocol) (err error) {
 	if p.IsSetBusinessAddress() {
 		if err := oprot.WriteFieldBegin("businessAddress", thrift.STRING, 30); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 30:businessAddress: ", p), err)
@@ -2022,7 +2022,7 @@ func (p *UserAttributes) writeField30(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField31(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField31(oprot thrift.TProtocol) (err error) {
 	if p.IsSetHideSponsorBilling() {
 		if err := oprot.WriteFieldBegin("hideSponsorBilling", thrift.BOOL, 31); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 31:hideSponsorBilling: ", p), err)
@@ -2037,7 +2037,7 @@ func (p *UserAttributes) writeField31(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField32(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField32(oprot thrift.TProtocol) (err error) {
 	if p.IsSetTaxExempt() {
 		if err := oprot.WriteFieldBegin("taxExempt", thrift.BOOL, 32); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 32:taxExempt: ", p), err)
@@ -2052,7 +2052,7 @@ func (p *UserAttributes) writeField32(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField33(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField33(oprot thrift.TProtocol) (err error) {
 	if p.IsSetUseEmailAutoFiling() {
 		if err := oprot.WriteFieldBegin("useEmailAutoFiling", thrift.BOOL, 33); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 33:useEmailAutoFiling: ", p), err)
@@ -2067,7 +2067,7 @@ func (p *UserAttributes) writeField33(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) writeField34(oprot thrift.TProtocol) (err error) {
+func (p *UserAttr) writeField34(oprot thrift.TProtocol) (err error) {
 	if p.IsSetReminderEmailConfig() {
 		if err := oprot.WriteFieldBegin("reminderEmailConfig", thrift.I32, 34); err != nil {
 			return thrift.PrependError(fmt.Sprintf("%T write field begin error 34:reminderEmailConfig: ", p), err)
@@ -2082,9 +2082,9 @@ func (p *UserAttributes) writeField34(oprot thrift.TProtocol) (err error) {
 	return err
 }
 
-func (p *UserAttributes) String() string {
+func (p *UserAttr) String() string {
 	if p == nil {
 		return "<nil>"
 	}
-	return fmt.Sprintf("UserAttributes(%+v)", *p)
+	return fmt.Sprintf("UserAttr(%+v)", *p)
 }
