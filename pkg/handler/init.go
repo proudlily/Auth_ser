@@ -2,8 +2,19 @@ package handler
 
 import (
 	"github.com/asyoume/Auth/pkg/models"
+	"github.com/asyoume/Auth/pkg/pulic_type"
 )
 
-func Init() {
-	models.Init()
+var conf *pulic_type.ConfType
+
+func Init(conf_path string) error {
+	conf, err := ConfigInit(conf_path)
+	if err != nil {
+		return err
+	}
+	models.Init(conf.MicroSer["db"], conf.MicroSer["dblog"])
+	if err != nil {
+		return err
+	}
+	return nil
 }

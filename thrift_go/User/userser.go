@@ -139,16 +139,16 @@ func (p *UserSerClient) recvRegister() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error2 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error3 error
-		error3, err = error2.Read(iprot)
+		error0 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error1 error
+		error1, err = error0.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error3
+		err = error1
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -220,16 +220,16 @@ func (p *UserSerClient) recvLogin() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error4 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error5 error
-		error5, err = error4.Read(iprot)
+		error2 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error3 error
+		error3, err = error2.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error5
+		err = error3
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -299,16 +299,16 @@ func (p *UserSerClient) recvLogout() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error6 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error7 error
-		error7, err = error6.Read(iprot)
+		error4 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error5 error
+		error5, err = error4.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error7
+		err = error5
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -380,16 +380,16 @@ func (p *UserSerClient) recvAppRegister() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error8 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error9 error
-		error9, err = error8.Read(iprot)
+		error6 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error7 error
+		error7, err = error6.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error9
+		err = error7
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -463,16 +463,16 @@ func (p *UserSerClient) recvAppLogin() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error10 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error11 error
-		error11, err = error10.Read(iprot)
+		error8 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error9 error
+		error9, err = error8.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error11
+		err = error9
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -542,16 +542,16 @@ func (p *UserSerClient) recvAccessToken() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error12 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error13 error
-		error13, err = error12.Read(iprot)
+		error10 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error11 error
+		error11, err = error10.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error13
+		err = error11
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -625,16 +625,16 @@ func (p *UserSerClient) recvAuthorize() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error14 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error15 error
-		error15, err = error14.Read(iprot)
+		error12 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error13 error
+		error13, err = error12.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error15
+		err = error13
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -706,16 +706,16 @@ func (p *UserSerClient) recvOauth2Token() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error16 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error17 error
-		error17, err = error16.Read(iprot)
+		error14 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error15 error
+		error15, err = error14.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error17
+		err = error15
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -787,16 +787,16 @@ func (p *UserSerClient) recvUserInfo() (value string, err error) {
 		return
 	}
 	if mTypeId == thrift.EXCEPTION {
-		error18 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
-		var error19 error
-		error19, err = error18.Read(iprot)
+		error16 := thrift.NewTApplicationException(thrift.UNKNOWN_APPLICATION_EXCEPTION, "Unknown Exception")
+		var error17 error
+		error17, err = error16.Read(iprot)
 		if err != nil {
 			return
 		}
 		if err = iprot.ReadMessageEnd(); err != nil {
 			return
 		}
-		err = error19
+		err = error17
 		return
 	}
 	if mTypeId != thrift.REPLY {
@@ -834,17 +834,17 @@ func (p *UserSerProcessor) ProcessorMap() map[string]thrift.TProcessorFunction {
 
 func NewUserSerProcessor(handler UserSer) *UserSerProcessor {
 
-	self20 := &UserSerProcessor{handler: handler, processorMap: make(map[string]thrift.TProcessorFunction)}
-	self20.processorMap["Register"] = &userSerProcessorRegister{handler: handler}
-	self20.processorMap["Login"] = &userSerProcessorLogin{handler: handler}
-	self20.processorMap["Logout"] = &userSerProcessorLogout{handler: handler}
-	self20.processorMap["AppRegister"] = &userSerProcessorAppRegister{handler: handler}
-	self20.processorMap["AppLogin"] = &userSerProcessorAppLogin{handler: handler}
-	self20.processorMap["AccessToken"] = &userSerProcessorAccessToken{handler: handler}
-	self20.processorMap["Authorize"] = &userSerProcessorAuthorize{handler: handler}
-	self20.processorMap["Oauth2Token"] = &userSerProcessorOauth2Token{handler: handler}
-	self20.processorMap["UserInfo"] = &userSerProcessorUserInfo{handler: handler}
-	return self20
+	self18 := &UserSerProcessor{handler: handler, processorMap: make(map[string]thrift.TProcessorFunction)}
+	self18.processorMap["Register"] = &userSerProcessorRegister{handler: handler}
+	self18.processorMap["Login"] = &userSerProcessorLogin{handler: handler}
+	self18.processorMap["Logout"] = &userSerProcessorLogout{handler: handler}
+	self18.processorMap["AppRegister"] = &userSerProcessorAppRegister{handler: handler}
+	self18.processorMap["AppLogin"] = &userSerProcessorAppLogin{handler: handler}
+	self18.processorMap["AccessToken"] = &userSerProcessorAccessToken{handler: handler}
+	self18.processorMap["Authorize"] = &userSerProcessorAuthorize{handler: handler}
+	self18.processorMap["Oauth2Token"] = &userSerProcessorOauth2Token{handler: handler}
+	self18.processorMap["UserInfo"] = &userSerProcessorUserInfo{handler: handler}
+	return self18
 }
 
 func (p *UserSerProcessor) Process(iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
@@ -857,12 +857,12 @@ func (p *UserSerProcessor) Process(iprot, oprot thrift.TProtocol) (success bool,
 	}
 	iprot.Skip(thrift.STRUCT)
 	iprot.ReadMessageEnd()
-	x21 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function "+name)
+	x19 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function "+name)
 	oprot.WriteMessageBegin(name, thrift.EXCEPTION, seqId)
-	x21.Write(oprot)
+	x19.Write(oprot)
 	oprot.WriteMessageEnd()
 	oprot.Flush()
-	return false, x21
+	return false, x19
 
 }
 

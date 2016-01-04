@@ -13,6 +13,7 @@ type Test1 struct {
 }
 
 var Test1_all_column = "test1,test2"
+var Test1_all_column_index = "$1,$2"
 
 func Test1Reflect(s interface{}, column []string) (*[]interface{},*string, error) {
   rel := make([]interface{}, 0, 10)
@@ -34,45 +35,42 @@ func Test1Reflect(s interface{}, column []string) (*[]interface{},*string, error
   return &rel,&rel_str, nil
 }
 
-func Test1ColumnReflect(s interface{}, column []string) (*string, *string, error) {
+func Test1UpdateReflect(s interface{}, column []string) (*string, *[]interface{}, error) {
   rel := ""
-  rel_str := ""
+  rel_s :=make([]interface{}, 0, 10)
   sr := s.(*Test1)
-  for _, v := range column {
-    rel = rel + v + ","
+  for k, v := range column {
+    rel = rel+v+"=$"+fmt.Sprintf("%d",k+1)+","
     switch v { 
     case "test1":
-      rel_str = rel_str + "'"+sr.Test1+"'" + ","
+      rel_s = append(rel_s,sr.Test1)
     case "test2":
-      rel_str = rel_str + "'"+sr.Test2+"'" + ","
+      rel_s = append(rel_s,sr.Test2)
     default:
-      rel_str = ""
-      return &rel, &rel_str, errors.New(v + ",字段不存在")
+      return &rel, &rel_s, errors.New(v + ",字段不存在")
     }
   }
   rel = strings.TrimRight(rel, ",")
-  rel_str = strings.TrimRight(rel_str, ",")
-  return &rel, &rel_str, nil
+  return &rel, &rel_s, nil
 }
 
-func Test1AllReflect(s interface{}) (*string, *string, error) {
+func Test1AllReflect(s interface{}) (*string,*string, *[]interface{}, error) {
   rel := &Test1_all_column
-  rel_str := ""
+  rel_str := &Test1_all_column_index
+  rel_s :=make([]interface{}, 0, 10)
   sr := s.(*Test1)
   
   if sr.Test1 != "" {
-    rel_str = rel_str + "'"+sr.Test1+"'"
+    rel_s = append(rel_s,sr.Test1)
   }else{
-    rel_str = rel_str + "''"
+    rel_s = append(rel_s,"")
   }
-  rel_str = rel_str+","
   if sr.Test2 != "" {
-    rel_str = rel_str + "'"+sr.Test2+"'"
+    rel_s = append(rel_s,sr.Test2)
   }else{
-    rel_str = rel_str + "''"
+    rel_s = append(rel_s,"")
   }
-  
-  return rel, &rel_str, nil
+  return rel, rel_str,&rel_s, nil
 }
 
 func Test1New() interface{}{
@@ -105,7 +103,7 @@ func init() {
   postgres.SqlCheckMap["test1"] = Test1Check
   postgres.SqlCheck2Map["test1"] = Test1Check2
   postgres.AllReflectMap["test1"] = Test1AllReflect
-  postgres.ColumnReflectMap["test1"] = Test1ColumnReflect
+  postgres.UpdateReflectMap["test1"] = Test1UpdateReflect
 }
 func test() {
     fmt.Println("start sqlmap")

@@ -1,9 +1,16 @@
 {
   "name": "asyoume用户授权组件",
-  "mq_conf": {
-    "addr": "",
-    "app_id": "",
-    "app_key": "",
+  "micro_ser": {
+    "db": {
+      "addr": "",
+      "app_id": "",
+      "app_key": ""
+    },
+    "log": {
+      "addr": "",
+      "app_id": "",
+      "app_key": ""
+    }
   },
   "version": "0.0.1"
 }

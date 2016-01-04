@@ -1,38 +1,40 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/asyoume/Auth/pkg/handler"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 	"github.com/rs/cors"
-	"net/http"
+	"os"
+	"path/filepath"
 )
+
+func Usage() {
+	fmt.Fprint(os.Stderr, "Usage of ", os.Args[0], ":\n")
+	flag.PrintDefaults()
+	fmt.Fprint(os.Stderr, "\n")
+}
 
 var uhander = handler.UserHandler{}
 
-func UserRegister(c *echo.Context) error {
-	r, err := uhander.Register(c.Query("u"), "")
-	if err == nil {
-		return c.String(http.StatusOK, r)
-	} else {
-		return c.String(http.StatusOK, "err")
-	}
-}
-
-func UserLogin(c *echo.Context) error {
-	r, err := uhander.Register(c.Form("name"), "")
-
-	fmt.Println(err)
-	if err == nil {
-		return c.String(http.StatusOK, r)
-	} else {
-		return c.String(http.StatusOK, "err")
-	}
-}
-
 func main() {
-	handler.Init()
+	//获取执行参数
+	conf_path := flag.String("conf", "", "配置文件路径")
+	flag.Parse()
+	//获取配置文件的路径
+	if len((*conf_path)) > 0 && string((*conf_path)[0]) != "/" {
+		var curr_path string = ""
+		curr_path, err := filepath.Abs(filepath.Dir(os.Args[0]))
+		if err != nil {
+			panic(err)
+		}
+		*conf_path = curr_path + "/" + *conf_path
+	}
+	//初始化控制层
+	handler.Init(*conf_path)
+
 	e := echo.New()
 	e.Use(mw.Logger())
 	e.Use(mw.Recover())

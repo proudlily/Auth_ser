@@ -3,7 +3,7 @@ namespace java me.asyou.time
 
 typedef i64 Timestamp
 
-struct User {
+/*struct User {
   1:  required  string id,
   2:  required  string username,
   3:  required  string email,
@@ -49,9 +49,7 @@ struct UserAttr {
   32: optional  bool taxExempt,
   33: optional  bool useEmailAutoFiling,
   34: optional  i32 reminderEmailConfig
-}
-
-
+}*/ 
 
 service UserSer {
 

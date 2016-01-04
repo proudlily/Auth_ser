@@ -14,7 +14,7 @@ out=`go build -o "$DIR/../_out/http_ser" github.com/asyoume/Auth/pkg/ser_http  2
 
 if [ $? -eq 0 ];then
    echo  -e  "\033[32m程序编译成功,开始执行\033[0m"
-   "$DIR/../_out/http_ser"
+   "$DIR/../_out/http_ser" -conf "$DIR/../conf/app.json"
 else
     echo  -e  "\033[31m程序编译出错,请检查代码哦\033[0m"
     echo "$out"
