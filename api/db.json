@@ -7,12 +7,14 @@
 			"name": "test1",
 			"struct_name": "Test1",
 			"tag": "json:\"test1\"",
-			"type": "string"
+			"type": "string",
+			"default": ""
 		}, {
 			"name": "test2",
 			"struct_name": "Test2",
 			"tag": "json:\"test2\"",
-			"type": "string"
+			"type": "string",
+			"default": ""
 		}]
 	}]
 }

@@ -4,12 +4,15 @@ import (
   "errors"
   "github.com/asyoume/postgres"
   "strings"
+  "fmt"
 )
 
 type Test1 struct { 
     Test1   string `json:"test1"`
     Test2   string `json:"test2"`
 }
+
+var Test1_all_column = "test1,test2"
 
 func Test1Reflect(s interface{}, column []string) (*[]interface{},*string, error) {
   rel := make([]interface{}, 0, 10)
@@ -29,6 +32,47 @@ func Test1Reflect(s interface{}, column []string) (*[]interface{},*string, error
   }
   rel_str= strings.TrimRight(rel_str, ",")
   return &rel,&rel_str, nil
+}
+
+func Test1ColumnReflect(s interface{}, column []string) (*string, *string, error) {
+  rel := ""
+  rel_str := ""
+  sr := s.(*Test1)
+  for _, v := range column {
+    rel = rel + v + ","
+    switch v { 
+    case "test1":
+      rel_str = rel_str + "'"+sr.Test1+"'" + ","
+    case "test2":
+      rel_str = rel_str + "'"+sr.Test2+"'" + ","
+    default:
+      rel_str = ""
+      return &rel, &rel_str, errors.New(v + ",字段不存在")
+    }
+  }
+  rel = strings.TrimRight(rel, ",")
+  rel_str = strings.TrimRight(rel_str, ",")
+  return &rel, &rel_str, nil
+}
+
+func Test1AllReflect(s interface{}) (*string, *string, error) {
+  rel := &Test1_all_column
+  rel_str := ""
+  sr := s.(*Test1)
+  
+  if sr.Test1 != "" {
+    rel_str = rel_str + "'"+sr.Test1+"'"
+  }else{
+    rel_str = rel_str + "''"
+  }
+  rel_str = rel_str+","
+  if sr.Test2 != "" {
+    rel_str = rel_str + "'"+sr.Test2+"'"
+  }else{
+    rel_str = rel_str + "''"
+  }
+  
+  return rel, &rel_str, nil
 }
 
 func Test1New() interface{}{
@@ -60,4 +104,9 @@ func init() {
   postgres.SqlAddMap["test1"] = Test1Add
   postgres.SqlCheckMap["test1"] = Test1Check
   postgres.SqlCheck2Map["test1"] = Test1Check2
+  postgres.AllReflectMap["test1"] = Test1AllReflect
+  postgres.ColumnReflectMap["test1"] = Test1ColumnReflect
+}
+func test() {
+    fmt.Println("start sqlmap")
 }

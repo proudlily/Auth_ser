@@ -8,7 +8,7 @@ import (
 
 func Init() {
 	//初始化数据库
-	sqlurl := "postgres://postgres:all123456@m.aolilong.net/wxmall?sslmode=disable"
+	sqlurl := ""
 	loger := log.KafakLoger{}
 	err := db_drive.Init(sqlurl, &loger)
 	if err != nil {
@@ -17,7 +17,15 @@ func Init() {
 		fmt.Println("初始化postgresql数据库成功")
 	}
 
-	test := Test1{}
+	test := Test1{Test1: "adadad"}
+	err = db_drive.Insert("test1", &test)
+	fmt.Println(err)
+
+	test = Test1{Test1: "adadad"}
+	err = db_drive.Update("test1", "", &test)
+	fmt.Println(err)
+
+	test = Test1{}
 	err = db_drive.One("test1", "", &test, []string{"test1", "test2"})
 	fmt.Println(err)
 	fmt.Println(test)
