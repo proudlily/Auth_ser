@@ -1,20 +1,33 @@
 package handler
 
 import (
+	"encoding/json"
 	"fmt"
-	//"github.com/asyoume/Auth/thrift_go/User"
+	"github.com/asyoume/Auth/pkg/models"
 )
 
 type UserHandler struct {
 }
 
 func (this UserHandler) Register(u, device_id string) (r string, err error) {
-	fmt.Print("Register()\n" + u)
-	return "Register result2 " + u, nil
+	user := models.User{}
+	err = json.Unmarshal([]byte(u), &user)
+	if err != nil {
+		return r, err
+	}
+	err = models.UserAdd(&user)
+	if err != nil {
+		return r, err
+	}
+	return user.Id, nil
 }
 
 func (this UserHandler) Login(key, pwd, device_id string) (r string, err error) {
-	fmt.Print("ping()\n")
+	err = models.UserCheck(&user)
+	if err != nil {
+		return r, err
+	}
+	return user.Id, nil
 	return "", nil
 }
 

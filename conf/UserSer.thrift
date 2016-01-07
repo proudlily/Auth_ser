@@ -5,7 +5,8 @@ typedef i64 Timestamp
 
 /*struct User {
   1:  required  string id,
-  2:  required  string username,
+  2:  required  string name,
+  2:  required  string nick,
   3:  required  string email,
   4:  required  string name,
   6:  optional  string timezone,

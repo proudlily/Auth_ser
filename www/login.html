@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js">
+<![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js">
+<![endif]-->
+<!--[if !IE]>
+<!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Asyoume</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="assets/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="assets/pages/css/login-2.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+            <!-- END HEAD -->
+
+<body class=" login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a href="index.html">
+            <img src="../assets/layouts/layout4/img/time2.png" style="height: 57px;" alt="" />
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <form class="login-form" action="index.html" method="post">
+            <div class="form-title">
+                <span class="form-title">又见面了.</span>
+                <span class="form-subtitle">打声招呼先.</span>
+            </div>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>请输入正确的信息，登陆系统.</span>
+            </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">用户名/邮箱</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名/邮箱" name="username" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">密码</label>
+                <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password" />
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn red btn-block uppercase submit">登陆</button>
+            </div>
+            <div class="login-options">
+                <h4 class="pull-left">姿势不对</h4>
+                <h4 class="pull-right">
+                    <a href="javascript:;" id="forget-password" class="forget-password">忘记密码?</a>
+                </h4>
+            </div>
+            <div class="create-account">
+                <p>
+                    <a href="javascript:;" class="btn-primary btn" id="register-btn">创建一个帐号</a>
+                </p>
+            </div>
+        </form>
+        <!-- END LOGIN FORM -->
+        <!-- BEGIN FORGOT PASSWORD FORM -->
+        <form class="forget-form" action="" method="post">
+            <div class="form-title">
+                <span class="form-title">忘记密码 ?</span>
+                <span class="form-subtitle">请输入你的账户或手机号，短信会发送到你的手机.</span>
+            </div>
+            <div class="form-group">
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="账户/手机号" name="email" />
+            </div>
+            <div class="form-actions">
+                <button type="button" id="back-btn" class="btn btn-default">返回</button>
+                <button type="submit" class="btn btn-primary uppercase pull-right">提交</button>
+            </div>
+        </form>
+        <!-- END FORGOT PASSWORD FORM -->
+        <!-- BEGIN REGISTRATION FORM -->
+        <form class="register-form" action="index.html" method="post">
+            <div class="form-title">
+                <span class="form-title">你好，初次见面，多多指教</span>
+            </div>
+            <p class="hint">请输入你的信息:</p>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">昵称</label>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="昵称" name="nick" />
+            </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">邮箱</label>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="邮箱" name="email" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">手机号</label>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="手机号" name="tel" />
+            </div>
+            <p class="hint">请输入你的账户信息:</p>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">账户名</label>
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="账户名" name="name" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">账户密码</label>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password" placeholder="账户密码" name="password" />
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">再次输入密码</label>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="再次输入密码" name="rpassword" />
+            </div>
+            <!--div class="form-group margin-top-20 margin-bottom-20">
+                <label class="check">
+                    <input type="checkbox" name="tnc" />
+                    <span class="loginblue-font">I agree to the</span>
+                    <a href="javascript:;" class="loginblue-link">Terms of Service</a>
+                    <span class="loginblue-font">and</span>
+                    <a href="javascript:;" class="loginblue-link">Privacy Policy</a>
+                </label>
+                <div id="register_tnc_error"></div>
+            </div-->
+            <div class="form-actions">
+                <button type="button" id="register-back-btn" class="btn btn-default">返回</button>
+                <button type="submit" id="register-submit-btn" class="btn red uppercase pull-right">提交</button>
+            </div>
+        </form>
+        <!-- END REGISTRATION FORM -->
+    </div>
+    <!-- END LOGIN -->
+    <!--[if lt IE 9]>
+    <script src="assets/global/plugins/respond.min.js"></script>
+    <script src="assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="js/scripts/login.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+</body>
+
+</html>

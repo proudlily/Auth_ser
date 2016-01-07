@@ -15,7 +15,7 @@ out=`go build -o "$DIR/../_out/thrift_ser" github.com/asyoume/Auth/pkg/ser_thrif
 if [ $? -eq 0 ];then
    echo  -e  "\033[32m程序编译成功,开始执行\033[0m"
    #run server
-  "$DIR/../_out/thrift_ser"  -P "binary" -transport "http"  -addr "10.64.3.145:9090" -framed  "off" -buffered "off"
+  "$DIR/../_out/thrift_ser"  -P "binary" -transport "http"  -addr "10.64.3.145:9090" -framed  "off" -buffered "off"  -conf "$DIR/../conf/app.json"
 else
     echo  -e  "\033[31m程序编译出错,请检查代码哦\033[0m"
     echo "$out"

@@ -2,7 +2,7 @@
   "name": "asyoume用户授权组件",
   "micro_ser": {
     "db": {
-      "addr": "",
+      "addr": "postgres://aye_auth:123456@127.0.0.1/aye_auth?sslmode=disable",
       "app_id": "",
       "app_key": ""
     },
