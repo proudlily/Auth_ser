@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/asyoume/Auth/pkg/models"
+	//"strings"
+	"errors"
 )
 
 type UserHandler struct {
@@ -23,12 +25,16 @@ func (this UserHandler) Register(u, device_id string) (r string, err error) {
 }
 
 func (this UserHandler) Login(key, pwd, device_id string) (r string, err error) {
-	err = models.UserCheck(&user)
+	ut := models.User{}
+	err = models.DB.One("user", "WHERE name='"+key+"' OR email='"+key+"'", &ut, []string{"passwd"})
 	if err != nil {
-		return r, err
+		return r, errors.New("账户和密码不匹配")
 	}
-	return user.Id, nil
-	return "", nil
+	if pwd != ut.Passwd {
+		return "", errors.New("账户和密码不匹配")
+	}
+	fmt.Println(ut)
+	return ut.Id, nil
 }
 
 func (this UserHandler) Logout(key, device_id string) (r string, err error) {

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/asyoume/Auth/pkg/handler"
 	"github.com/labstack/echo"
 	"net/http"
@@ -19,12 +18,11 @@ func UserRegister(c *echo.Context) error {
 }
 
 func UserLogin(c *echo.Context) error {
-	r, err := uhander.Register(c.Form("u"), "")
+	r, err := uhander.Login(c.Form("username"), c.Form("password"), "")
 
-	fmt.Println(err)
 	if err == nil {
 		return c.String(http.StatusOK, r)
 	} else {
-		return c.String(http.StatusOK, "err")
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 }
