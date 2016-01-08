@@ -1,5 +1,5 @@
 ##asyoume Auth是什么？
-* asyoume是极限的传承项目，
+* asyoume是极限的传承项目，定义了一系列互联网相关的组件
 * auth是一个基于oauth2的用户授权模块
 
 
