@@ -18,4 +18,4 @@
 * 安装依赖  go install github.com/asyoume/postgresql/pgsql_map
 * 获取源码  go get github.com/asyoume/Auth_ser
 * 配置文件  编辑源码目录下conf/app.json文件配置依赖的数据库，依赖的缓存服务
-* 运行系统  sh hack/http.sh启动http协议的服务 || sh hack/run.sh启动thrift协议的服务
+* 运行系统  源码目录下执行sh hack/http.sh启动http协议的服务 || sh hack/run.sh启动thrift协议的服务
