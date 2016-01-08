@@ -10,7 +10,7 @@ DIR="$( cd -P "$( dirname "$SOURCE"  )" && pwd  )"
 
 killall -9 http_ser
 
-out=`go build -o "$DIR/../_out/http_ser" github.com/asyoume/Auth/pkg/ser_http  2>&1 >/dev/null`
+out=`go build -o "$DIR/../_out/http_ser" github.com/asyoume/Auth_ser/pkg/ser_http  2>&1 >/dev/null`
 
 if [ $? -eq 0 ];then
    echo  -e  "\033[32m程序编译成功,开始执行\033[0m"

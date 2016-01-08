@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/asyoume/Auth/pkg/models"
-	"github.com/asyoume/Auth/pkg/pulic_type"
+	"github.com/asyoume/Auth_ser/pkg/models"
+	"github.com/asyoume/Auth_ser/pkg/pulic_type"
 )
 
 var conf *pulic_type.ConfType

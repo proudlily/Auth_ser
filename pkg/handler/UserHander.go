@@ -3,7 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/asyoume/Auth/pkg/models"
+	"github.com/asyoume/Auth_ser/pkg/models"
 	//"strings"
 	"errors"
 )

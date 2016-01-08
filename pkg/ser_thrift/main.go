@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"git.apache.org/thrift.git/lib/go/thrift"
-	"github.com/asyoume/Auth/pkg/handler"
+	"github.com/asyoume/Auth_ser/pkg/handler"
 	"os"
 	"path/filepath"
 )

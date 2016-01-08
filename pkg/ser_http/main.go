@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/asyoume/Auth/pkg/handler"
+	"github.com/asyoume/Auth_ser/pkg/handler"
 	"github.com/labstack/echo"
 	mw "github.com/labstack/echo/middleware"
 	"github.com/rs/cors"

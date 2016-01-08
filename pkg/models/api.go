@@ -2,8 +2,8 @@ package models
 
 import (
 	"fmt"
-	"github.com/asyoume/Auth/pkg/log"
-	"github.com/asyoume/Auth/pkg/pulic_type"
+	"github.com/asyoume/Auth_ser/pkg/log"
+	"github.com/asyoume/Auth_ser/pkg/pulic_type"
 	db_driver "github.com/asyoume/postgres"
 )
 

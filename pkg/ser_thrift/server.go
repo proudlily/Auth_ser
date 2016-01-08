@@ -4,8 +4,8 @@ import (
 	"crypto/tls"
 	"fmt"
 	"git.apache.org/thrift.git/lib/go/thrift"
-	"github.com/asyoume/Auth/pkg/handler"
-	"github.com/asyoume/Auth/thrift_go/User"
+	"github.com/asyoume/Auth_ser/pkg/handler"
+	"github.com/asyoume/Auth_ser/thrift_go/User"
 )
 
 func runServer(transportFactory thrift.TTransportFactory, transport_type string, protocolFactory thrift.TProtocolFactory, addr string, secure bool) error {
